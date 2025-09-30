@@ -1,0 +1,9 @@
+bin
+obj
+.vscode
+.idea
+*.user
+*.suo
+**/Properties/launchSettings.json
+.env
+.txt

@@ -1,0 +1,23 @@
+Under the hood, when you use async in C#, the compiler transforms your method into a state machine. Here’s how it works:
+
+State Machine Generation:
+The compiler rewrites your async method into a class that tracks its execution state (where it paused, what variables it needs, etc.).
+
+Task Return Type:
+The method returns a Task (or Task<T>), which represents the ongoing operation.
+
+Await Keyword:
+When the method hits an await, it:
+    * Checks if the awaited task is complete.
+    * If not, it saves the current state and returns control to the caller.
+    * When the awaited task finishes, the state machine resumes the method from where it left off.
+
+Thread Usage:
+The method does not block the thread while waiting. The thread is free to handle other work.
+
+
+The reason why Delete() does not allow await is:
+- It does not involve any immediate database interaction when called, merely a state change in memory
+- does not involve waiting and is a quick in-memory operation, making it asynchronous would not provide any benefits and could even lead to less efficient resource utilization.
+
+Remove is not an I/O operation it's just a mark on the DB to delete something you want to delete. then you have SaveChangesAsync with it's a real I/O operation and this really delete the id from the DB. Even if you use "remove" you can still use your marked data until u use the savechangesasync method.
