@@ -1,39 +1,24 @@
-import React from 'react'
+import React, {type JSX, type SyntheticEvent} from 'react'
 import Card from '../Cards/Card.tsx';
-
-type List={
-    "companyName": string,
-    "ticker": string,
-    "price": number
+import type {CompanySearch} from "../../company";
+interface Props{
+    searchResult: CompanySearch[];
+    onPortfolioCreate: (e:SyntheticEvent) => void;
 }
 
-const CardList = () => {
-    var data : Array<List> =[{
-        "companyName": "test",
-        "ticker": "test",
-        "price": 10
-    },{
-        "companyName": "test1",
-        "ticker": "test1",
-        "price": 10
-    }]
-    console.log(data)
+const CardList: React.FC<Props> = ({searchResult,onPortfolioCreate}:Props) : JSX.Element => {
+    
   return (
-    <div>
-        {data.length>0 ? (
-
-            data.map((element,id) => (
-                <div>
-                    <Card key={id} companyName={element.companyName} ticker={element.ticker} price={element.price}></Card>
-                </div>
-                
-                
+    <>
+        {searchResult.length>0 ? (
+            searchResult.map((res,id)=>(
+                <Card key={id} id={res.symbol} searchResult={res} onPortfolioCreate={onPortfolioCreate}/>
             ))
-        ) : (<p>Empty</p>)
-
-        }
+        ):(
+            <h1>No results</h1>
+        )}
         
-    </div>
+    </>
    
   )
 }
