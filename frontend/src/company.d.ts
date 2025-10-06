@@ -1,3 +1,5 @@
+import {string} from "yup";
+
 export interface CompanySearch {
     currency: string;
     exchange: string;
@@ -7,41 +9,42 @@ export interface CompanySearch {
 }
 
 export interface CompanyProfile {
-    symbol: string;
-    price: number;
-    beta: number;
-    volAvg: number;
-    mktCap: number;
-    lastDiv: number;
-    range: string;
-    changes: number;
-    companyName: string;
-    currency: string;
-    cik: string;
-    isin: string;
-    exchange: string;
-    exchangeShortName: string;
-    industry: string;
-    website: string;
-    description: string;
-    ceo: string;
-    sector: string;
-    counter: string;
-    fullTimeEmployees: string;
-    phone: string;
     address: string;
+    averageVolume: number;
+    beta: number;
+    ceo: string;
+    change: number;
+    changePercentage: number;
+    cik: string;
     city: string;
-    state: string;
-    zip: string;
-    dcfDiff: number;
-    dcf: number;
-    image: string;
-    ipoDate: string;
+    companyName: string;
+    country: string;
+    currency: string;
+    cusip: string | null;
     defaultImage: boolean;
-    isEtf: boolean;
+    description: string;
+    exchange: string;
+    exchangeFullName: string;
+    fullTimeEmployees: number | string; // your sample is "32" (string)
+    image: string;
+    industry: string;
+    ipoDate: string | null; // empty string in your sample; allow null/empty
     isActivelyTrading: boolean;
     isAdr: boolean;
+    isEtf: boolean;
     isFund: boolean;
+    isin: string | null;
+    lastDividend: number;
+    marketCap: number;
+    phone: string;
+    price: number;
+    range: string; // e.g., "1.18-10.58"
+    sector: string;
+    state: string | null;
+    symbol: string;
+    volume: number;
+    website: string;
+    zip: string | null;
 }
 
 export interface CompanyKeyRatios {
@@ -308,33 +311,145 @@ export interface CompanyKeyMetrics {
     dividendPerShareTTM: number;
     debtToMarketCapTTM: number;
 }
-
+export interface FinancialMetricsTTM {
+    averageInventoryTTM: number;
+    averagePayablesTTM: number;
+    averageReceivablesTTM: number;
+    capexToDepreciationTTM: number;
+    capexToOperatingCashFlowTTM: number;
+    capexToRevenueTTM: number;
+    cashConversionCycleTTM: number;
+    currentRatioTTM: number;
+    daysOfInventoryOutstandingTTM: number;
+    daysOfPayablesOutstandingTTM: number;
+    daysOfSalesOutstandingTTM: number;
+    earningsYieldTTM: number;
+    enterpriseValueTTM: number;
+    evToEBITDATTM: number;
+    evToFreeCashFlowTTM: number;
+    evToOperatingCashFlowTTM: number;
+    evToSalesTTM: number;
+    freeCashFlowToEquityTTM: number;
+    freeCashFlowToFirmTTM: number;
+    freeCashFlowYieldTTM: number;
+    grahamNetNetTTM: number;
+    grahamNumberTTM: number;
+    incomeQualityTTM: number;
+    intangiblesToTotalAssetsTTM: number;
+    interestBurdenTTM: number;
+    investedCapitalTTM: number;
+    marketCapTTM: number;
+    netCurrentAssetValueTTM: number;
+    netDebtToEBITDATTM: number;
+    operatingCycleTTM: number;
+    operatingReturnOnAssetsTTM: number;
+    researchAndDevelopementToRevenueTTM: number;
+    returnOnAssetsTTM: number;
+    returnOnCapitalEmployedTTM: number;
+    returnOnEquityTTM: number;
+    returnOnInvestedCapitalTTM: number;
+    returnOnTangibleAssetsTTM: number;
+    salesGeneralAndAdministrativeToRevenueTTM: number;
+    stockBasedCompensationToRevenueTTM: number;
+    symbol: string;
+    tangibleAssetValueTTM: number;
+    taxBurdenTTM: number;
+    workingCapitalTTM: number;
+}
 export interface CompanyHistoricalDividend {
     symbol: string;
     historical: Dividend[];
 }
 
 export interface Dividend {
+    symbol:string;
     date: string;
-    label: string;
     adjDividend: number;
     dividend: number;
     recordDate: string;
     paymentDate: string;
     declarationDate: string;
+    yield:number;
+    frequency:string
 }
 
 export interface CompanyCompData {
+    // symbol: string;
+    // peersList: string[];
     symbol: string;
-    peersList: string[];
+    companyName: string;
+    price: number;
+    mktCap: number;
 }
 
 export interface CompanyTenK {
     symbol: string;
-    fillingDate: string;
+    filingDate: string;
     acceptedDate: string;
     cik: string;
     type: string;
     link: string;
     finalLink: string;
+    formType:string
+}
+
+export interface Dfc{
+    symbol: string;
+    date: string;
+    dfc: number;
+    stockPrice: number;
+}
+
+export interface AreaData {
+    time: string;
+    value: number;
+}
+
+export interface CandlestickData {
+    time: string;
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+}
+
+export interface StockNews{
+    symbol: string;
+    publishedDate:string;
+    publisher:string;
+    title:string;
+    image:string;
+    site:string;
+    text:string;
+    url:string;
+    
+}
+export interface GradeConsensus{
+    symbol:string;
+    strongBuy:number;
+    buy:number;
+    hold:number;
+    sell:number;
+    strongSell:number;
+    consensus:string;
+}
+
+export interface GradeHistory {
+    symbol: string;
+    date: string;
+    analystRatingsStrongBuy:number;
+    analystRatingsBuy:number;
+    analystRatingsHold:number;
+    analystRatingsSell:number;
+    analystRatingsStrongSell:number;
+}
+
+export interface Earnings{
+    symbol:string;
+    date:string;
+    epsActual:number;
+    epsEstimated:number;
+    revenueActual:number;
+    revenueEstimated:number;
+    lastUpdated:number
 }

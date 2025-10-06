@@ -105,7 +105,7 @@ app.UseCors(x => x
      .AllowAnyMethod()
      .AllowAnyHeader()
      .AllowCredentials()
-      //.WithOrigins("https://localhost:44351))
+      .WithOrigins("https://localhost:7214")
       .SetIsOriginAllowed(origin => true));
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
 
