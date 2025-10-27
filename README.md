@@ -73,19 +73,6 @@ Stock/
 - Node.js 18+
 - Docker & Docker Compose (optional)
 
-### Running with Docker (Recommended)
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd Stock
-```
-
-2. Start the application:
-```bash
-docker-compose up -d
-```
-
 3. Access the application:
    - Frontend: http://localhost:8081
    - Backend API: http://localhost:8080
@@ -168,18 +155,6 @@ The application uses Docker Compose with:
 - **Frontend**: Runs on port 8081 (nginx in production)
 - **Network**: Custom bridge network for service communication
 - **Health Checks**: Configured for backend service
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
